@@ -7,11 +7,21 @@
  **********************************************************************/
 
 var APP_TITLE   = '깊이 있는 수업·평가 설계 도우미';
-var APP_VERSION = '2.2.1';
+var APP_VERSION = '2.3.0';
 var DEFAULT_MODEL = 'gemini-2.5-flash';
 
 /** 한글 문서를 드라이브에 저장할 때 사용할 폴더 이름 */
 var DRIVE_FOLDER = '수업설계_한글문서';
+
+/**
+ * 제작 표기. 화면 왼쪽 아래, 사용 안내 창, 한글 문서 끝에 함께 쓰인다.
+ * 다른 학교·다른 분이 쓰실 때는 이 세 줄만 고치면 된다.
+ */
+var APP_CREDIT = {
+  training: '2026 전북형 깊이 있는 수업·평가 설계 연수',
+  author:   '설계 도구 제작  인월고등학교 유경현',
+  doc:      '2026 전북형 깊이 있는 수업·평가 설계 연수 · 설계 도구 제작 인월고등학교 유경현'
+};
 
 function doGet(e) {
   var t = HtmlService.createTemplateFromFile('Index');
