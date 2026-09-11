@@ -262,7 +262,7 @@ function stageCard(id){
       '<h2>'+esc(st.name)+'</h2>'+
       '<div class="q">'+esc(st.question)+'</div>'+
       '<div class="intro">'+esc(st.intro)+'</div>'+
-      '<div class="ubd">'+esc(st.ubd)+'</div>'+
+      '<div class="ubd">'+esc(st.mapping)+'</div>'+
     '</div>'+
     '<div class="in">'+
       '<div class="prompts">'+chips+'</div>'+
@@ -564,7 +564,12 @@ function applyPasted(){
   if(!text.trim()){ toast('붙여넣은 내용이 없습니다.'); return; }
   google.script.run
     .withSuccessHandler(function(res){
-      if(!res.ok){ toast('형식을 찾지 못했습니다. JSON 부분만 붙여 넣어 보세요.'); return; }
+      if(!res.ok){
+        toast(pasteKind==='lessons'
+          ? '형식을 찾지 못했습니다. [ 로 시작해 ] 로 끝나는 부분만 붙여 넣어 보세요.'
+          : '형식을 찾지 못했습니다. { 로 시작해 } 로 끝나는 부분만 붙여 넣어 보세요.');
+        return;
+      }
       if(pasteKind==='lessons') applyLessonRows(res.parsed);
       else applyParsed(pasteStageId,res.parsed);
       closeMask('maskPrompt');
@@ -738,7 +743,7 @@ function showPreview(){
   BOOT.stages.forEach(function(st){
     var d=state.stages[st.id]||{};
     h.push('<h2>'+esc(st.label)+'  '+esc(st.name)+'</h2>');
-    h.push('<p class="dq">생각해볼 질문 : '+esc(st.question)+'<br>'+esc(st.ubd)+'</p>');
+    h.push('<p class="dq">생각해볼 질문 : '+esc(st.question)+'<br>'+esc(st.mapping)+'</p>');
     h.push('<table>');
     st.fields.forEach(function(f){
       h.push('<tr><th>'+esc(f.label)+'</th><td>'+esc(d[f.key]||'')+'</td></tr>');
