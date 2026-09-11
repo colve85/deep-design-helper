@@ -222,6 +222,19 @@ function goStage(id){
   save();
 }
 
+/**
+ * AI 버튼은 저장된 키가 있을 때만 두 개로 나뉜다.
+ * 키가 없으면 [AI로 초안 만들기]도 결국 붙여넣기 창을 열기 때문에,
+ * 같은 일을 하는 버튼을 둘 보여 주지 않는다.
+ */
+function aiButtons(id){
+  if(BOOT.settings.hasKey){
+    return '<button class="btn pri" data-ai="1">AI로 초안 만들기</button>'+
+           '<button class="btn" data-paste="1">다른 AI로 하기</button>';
+  }
+  return '<button class="btn pri" data-paste="1">AI 프롬프트 만들기</button>';
+}
+
 function stageCard(id){
   var st=stageDef(id), u=currentUnit();
   var w=document.createElement('div');
@@ -269,8 +282,7 @@ function stageCard(id){
       exHtml+
       fields+
       '<div class="rowbtns" style="margin-bottom:14px">'+
-        '<button class="btn pri" data-ai="1">AI로 초안 만들기</button>'+
-        '<button class="btn" data-paste="1">프롬프트 복사 / 붙여넣기</button>'+
+        aiButtons(id)+
         '<span class="hint" id="aiMsg'+id+'" style="color:#7c8899;font-size:12.5px"></span>'+
       '</div>'+
       (id===3 ? lessonSection(u) : '')+
@@ -295,8 +307,10 @@ function stageCard(id){
   });
   var fb=w.querySelector('[data-fill]'); if(fb) fb.addEventListener('click', function(){ fillExample(id,false); });
   var ab=w.querySelector('[data-append]'); if(ab) ab.addEventListener('click', function(){ fillExample(id,true); });
-  w.querySelector('[data-ai]').addEventListener('click', function(){ runAI(id); });
-  w.querySelector('[data-paste]').addEventListener('click', function(){ openPrompt(id); });
+  var aiBtn=w.querySelector('[data-ai]');
+  if(aiBtn) aiBtn.addEventListener('click', function(){ runAI(id); });
+  var pasteBtn=w.querySelector('[data-paste]');
+  if(pasteBtn) pasteBtn.addEventListener('click', function(){ openPrompt(id); });
 
   if(id===3){
     var mg=w.querySelector('#matHost');
@@ -331,7 +345,8 @@ function lessonSection(u){
   '<div id="lessonHost"></div>'+
   '<div class="rowbtns" style="margin-bottom:16px">'+
     '<button class="btn" id="btnLessonAdd">+ 차시 추가</button>'+
-    '<button class="btn pri" id="btnLessonAI">AI로 소재 제안받기</button>'+
+    '<button class="btn pri" id="btnLessonAI">'+
+      (BOOT.settings.hasKey ? 'AI로 소재 제안받기' : '소재 제안 프롬프트 만들기')+'</button>'+
     '<span class="hint" id="aiMsgL" style="color:#7c8899;font-size:12.5px"></span>'+
   '</div>';
 }
@@ -596,11 +611,11 @@ function saveSettings(){
     localSettings.model=model;
     saveLocalSettings();
     BOOT.settings={ hasKey:!!localSettings.apiKey, model:localSettings.model||BOOT.settings.model };
-    closeMask('maskSettings'); toast('이 브라우저에 저장했습니다.');
+    closeMask('maskSettings'); render(); toast('이 브라우저에 저장했습니다.');
     return;
   }
   google.script.run
-    .withSuccessHandler(function(s){ BOOT.settings=s; closeMask('maskSettings'); toast('저장했습니다.'); })
+    .withSuccessHandler(function(s){ BOOT.settings=s; closeMask('maskSettings'); render(); toast('저장했습니다.'); })
     .withFailureHandler(function(e){ toast('오류: '+e.message); })
     .api_saveSettings({ apiKey:key?key:null, model:model });
 }
@@ -611,13 +626,13 @@ function clearKey(){
     BOOT.settings.hasKey=false;
     $('btnClearKey').style.display='none';
     $('inKey').placeholder='AIza…';
-    toast('키를 지웠습니다.');
+    render(); toast('키를 지웠습니다.');
     return;
   }
   google.script.run
     .withSuccessHandler(function(s){
       BOOT.settings=s; $('btnClearKey').style.display='none';
-      $('inKey').placeholder='AIza…'; toast('키를 지웠습니다.');
+      $('inKey').placeholder='AIza…'; render(); toast('키를 지웠습니다.');
     })
     .withFailureHandler(function(e){ toast('오류: '+e.message); })
     .api_saveSettings({ apiKey:'' });
