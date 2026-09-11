@@ -108,7 +108,7 @@ function api_buildPrompt(req) {
   L.push('[설계 원칙]');
   L.push('- 이 단계의 안내 질문: ' + stage.question);
   L.push('- ' + stage.intro);
-  L.push('- ' + stage.ubd);
+  L.push('- ' + stage.mapping);
   L.push('- 활동이 아니라 목표와 증거를 먼저 정하는 역방향 순서를 지킵니다.');
   L.push('- 내용 요소의 나열이 아니라, 학생이 도달할 상태와 그 증거를 중심으로 씁니다.');
   L.push('- "계산할 수 있다" 수준에 머무르지 말고 이해·설명·판단이 드러나게 씁니다.');
@@ -158,6 +158,7 @@ function api_buildPrompt(req) {
   L.push('}');
   L.push('');
   L.push('각 값은 줄바꿈(\\n)으로 구분된 2~4개의 문장 또는 항목으로 작성하고, 우리말 교육과정 용어를 사용하세요.');
+  L.push('값 안에서 큰따옴표(")는 쓰지 말고 홑따옴표(\')나 낫표(「」)를 쓰세요. JSON 문법이 깨집니다.');
   return L.join('\n');
 }
 
@@ -191,6 +192,7 @@ function api_buildLessonPrompt(req) {
   L.push('[{"phase":"탐색하기","element":"내용 요소","periods":"1차시","material":"수업 소재",' +
          '"open":"여는 질문","goal":"도달 목표","evidence":"확인할 증거",' +
          '"activity":"학생 활동","tool":"도구"}]');
+  L.push('값 안에서 큰따옴표(")는 쓰지 말고 홑따옴표(\')나 낫표(「」)를 쓰세요. JSON 문법이 깨집니다.');
   return L.join('\n');
 }
 
@@ -249,14 +251,85 @@ function callGemini_(prompt, wantArray, req) {
   return { ok: true, raw: text, parsed: parseModelJson_(text, wantArray) };
 }
 
-/** 모델 출력에서 JSON 부분만 뽑아 객체(또는 배열)로 만든다. 실패하면 null. */
+/**
+ * 모델 출력에서 JSON 부분을 뽑아 객체(또는 배열)로 만든다. 실패하면 null.
+ *
+ * 모델은 값 안에 큰따옴표를 그대로 넣거나("…라고 말한다") 줄바꿈을 날것으로
+ * 넣는 일이 잦다. 그대로 두면 JSON.parse 가 실패하므로 한 번 손본 뒤 다시 시도하고,
+ * 그래도 안 되면 키-값만 긁어내는 마지막 수단을 쓴다.
+ */
 function parseModelJson_(text, wantArray) {
-  var t = String(text).trim();
-  t = t.replace(/^```(?:json)?/i, '').replace(/```$/, '').trim();
+  var t = String(text === undefined || text === null ? '' : text);
+  t = t.replace(/```+\s*(?:json)?/gi, ' ');           // 코드블록 표시 제거
+
+  var got = sliceJson_(t, wantArray);
+  if (got === null) {                                  // 기대한 모양이 아니면 반대쪽도 본다
+    var other = sliceJson_(t, !wantArray);
+    if (other === null) return null;
+    var alt = parseBody_(other, !wantArray);
+    if (alt === null) return null;
+    if (wantArray) return (alt instanceof Array) ? alt : [alt];
+    return (alt instanceof Array) ? (alt.length ? alt[0] : null) : alt;
+  }
+  return parseBody_(got, wantArray);
+}
+
+function sliceJson_(t, wantArray) {
   var open = wantArray ? '[' : '{', close = wantArray ? ']' : '}';
   var a = t.indexOf(open), b = t.lastIndexOf(close);
   if (a < 0 || b <= a) return null;
-  try { return JSON.parse(t.substring(a, b + 1)); } catch (e) { return null; }
+  return t.substring(a, b + 1);
+}
+
+function parseBody_(body, wantArray) {
+  try { return JSON.parse(body); } catch (e) { /* 아래에서 손본다 */ }
+  try { return JSON.parse(repairJson_(body)); } catch (e2) { /* 마지막 수단으로 */ }
+  return looseExtract_(body, wantArray);
+}
+
+/**
+ * 문자열 값 안에 섞여 들어온 큰따옴표와 날것의 줄바꿈을 이스케이프한다.
+ * 닫는 따옴표인지 아닌지는 바로 뒤에 오는 구조 문자(, } ] :)로 판단한다.
+ */
+function repairJson_(s) {
+  var out = '', inStr = false, i, c, j, nx;
+  for (i = 0; i < s.length; i++) {
+    c = s.charAt(i);
+    if (!inStr) {
+      out += c;
+      if (c === '"') inStr = true;
+      continue;
+    }
+    if (c === '\\') { out += c + (s.charAt(i + 1) || ''); i++; continue; }
+    if (c === '"') {
+      j = i + 1;
+      while (j < s.length && ' \t\r\n'.indexOf(s.charAt(j)) >= 0) j++;
+      nx = s.charAt(j);
+      if (j >= s.length || nx === ',' || nx === '}' || nx === ']' || nx === ':') {
+        out += c; inStr = false;
+      } else {
+        out += '\\"';
+      }
+      continue;
+    }
+    if (c === '\n') { out += '\\n'; continue; }
+    if (c === '\r') { continue; }
+    if (c === '\t') { out += '\\t'; continue; }
+    out += c;
+  }
+  return out;
+}
+
+/** 그래도 안 되면 "키": "값" 짝만 긁어낸다. */
+function looseExtract_(body, wantArray) {
+  var re = /"([A-Za-z0-9_]+)"\s*:\s*"((?:[^"\\]|\\.)*)"/g;
+  var out = {}, m, found = false;
+  while ((m = re.exec(body)) !== null) {
+    out[m[1]] = m[2].replace(/\\n/g, '\n').replace(/\\"/g, '"').replace(/\\\\/g, '\\');
+    found = true;
+  }
+  if (!found) return null;
+  return wantArray ? [out] : out;
 }
 
 function api_parsePasted(payload) {
