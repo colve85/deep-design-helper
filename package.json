@@ -1,6 +1,6 @@
 {
   "name": "deep-design-helper",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "2022 개정 교육과정 백워드 설계를 위한 Google Apps Script 웹앱 — 목표 → 증거 → 학습 경험",
   "private": true,
   "scripts": {
@@ -8,5 +8,8 @@
     "dev": "node tools/dev-server.js",
     "push": "clasp push"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  }
 }

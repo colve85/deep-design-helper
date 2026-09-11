@@ -83,7 +83,42 @@ GRASPS 6요소, 루브릭 4수준, 학습 경험 4단계와 역순 배치 질문
 
 ---
 
-## 설치
+## 배포 방법 고르기
+
+같은 소스로 두 가지 배포가 가능합니다.
+
+| | **Google Apps Script** | **Vercel** |
+|---|---|---|
+| 배포 절차 | 파일 붙여넣기 또는 clasp | GitHub 연결 후 자동 |
+| 접근 제한 | 조직 내 사용자 등으로 제한 가능 | URL을 아는 누구나 (무료 플랜) |
+| Gemini API 키 | 교사별로 구글 계정에 저장 | 교사별로 **브라우저에** 저장 |
+| 한글 문서 내려받기 | 가능 (막히면 드라이브 저장으로 대체) | 가능 (제약 없음) |
+| 드라이브에 저장 | 지원 | 미지원 (버튼이 숨겨집니다) |
+| 비용 | 무료 | 무료 플랜으로 충분 |
+
+학교·교육청 계정으로 **참여자를 제한**하려면 Apps Script,
+**링크 하나로 누구나 바로 열게** 하려면 Vercel이 편합니다.
+
+---
+
+## 설치 ① — Vercel
+
+1. 이 저장소를 GitHub에 올립니다.
+2. [vercel.com](https://vercel.com) → **Add New → Project** → 저장소 선택
+3. Framework Preset은 **Other**, Build/Output 설정은 **비워 둡니다**.
+   (`vercel.json`이 이미 라우팅을 정의하고 있어 별도 설정이 필요 없습니다.)
+4. **Deploy** → 나온 URL을 공유합니다.
+
+API 키는 교사가 각자 웹앱의 **설정**에서 입력하며, 서버가 아니라 **그 브라우저에만** 저장됩니다.
+요청할 때마다 함께 전달되어 Gemini로 중계될 뿐 저장되지 않습니다.
+
+> 학교 공용 키 하나로 운영하려면 Vercel 프로젝트의 Environment Variables에
+> `GEMINI_API_KEY`(필요하면 `GEMINI_MODEL`)를 추가하면 됩니다. 이 경우 URL을 아는
+> 누구나 쓰게 되어 비용이 배포자에게 청구되니 권하지 않습니다.
+
+---
+
+## 설치 ② — Google Apps Script
 
 ### 방법 1 — 편집기에 붙여넣기 (가장 간단)
 
@@ -117,9 +152,9 @@ node tools/dev-server.js    # http://localhost:8080 에서 웹앱을 그대로 �
 node tools/verify.js        # 구문·데이터·문서 생성·프롬프트 점검
 ```
 
-`dev-server.js`는 `google.script.run` 호출을 실제 `src/*.gs` 함수로 중계하므로,
-Apps Script에 올리지 않고도 화면과 서버 로직을 함께 시험할 수 있습니다.
-(Gemini 호출과 드라이브 저장은 Apps Script 환경에서만 동작합니다.)
+`dev-server.js`는 Vercel 배포와 **같은 코드 경로**(`lib/gas-runtime.js`)를 쓰므로,
+여기서 보이는 화면이 Vercel에 올라갈 화면과 같습니다. Apps Script에 올리지 않고도
+화면과 서버 로직을 함께 시험할 수 있습니다. (드라이브 저장만 Apps Script 전용입니다.)
 
 ---
 
@@ -146,13 +181,22 @@ Apps Script에 올리지 않고도 화면과 서버 로직을 함께 시험할 �
 | `Style.html` | 스타일 |
 | `Script.html` | 화면 로직 |
 
+### Node 배포 `api/` · `lib/`
+
+Apps Script에만 올린다면 이 두 폴더는 없어도 됩니다.
+
+| 파일 | 역할 |
+|---|---|
+| `api/index.js` | Vercel 서버리스 진입점 — 화면 렌더와 API 중계 |
+| `lib/gas-runtime.js` | Node에서 `src/*.gs`를 그대로 실행하는 런타임 (Utilities 등 흉내내기, Gemini 호출) |
+| `vercel.json` | 라우팅과 함수 설정 |
+
 ### 도구 `tools/`
 
 | 파일 | 역할 |
 |---|---|
-| `dev-server.js` | 로컬 개발 서버 |
+| `dev-server.js` | 로컬 개발 서버 (Vercel 배포와 같은 경로로 동작) |
 | `verify.js` | 배포 전 점검 (GitHub Actions에서도 실행) |
-| `gas-shim.js` | Node에서 Apps Script 전역을 흉내내는 어댑터 |
 
 ---
 

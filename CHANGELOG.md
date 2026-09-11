@@ -1,5 +1,32 @@
 # 변경 이력
 
+## 2.2.0
+
+**Vercel 배포 지원.** 소스를 나누지 않고 같은 `src/*.gs` 로 Apps Script와 Vercel 양쪽에
+배포할 수 있습니다.
+
+### 더해진 것
+
+- `api/index.js` — Vercel 서버리스 진입점. 화면 렌더와 `google.script.run` 중계를 함께 처리.
+- `lib/gas-runtime.js` — Node에서 `src/*.gs` 를 그대로 실행하는 런타임.
+  `Utilities`·`Session`·`PropertiesService` 를 흉내내고, 동기 호출이 불가능한
+  `UrlFetchApp` 대신 Gemini 호출을 여기서 비동기로 처리합니다.
+  (기존 `tools/gas-shim.js` 를 옮겨 확장)
+- `vercel.json` — 라우팅과 함수 설정.
+- **브라우저 키 보관** — Vercel 배포에서는 API 키가 서버에 저장되지 않고 그 브라우저에만
+  남습니다. 요청마다 전달되어 중계될 뿐입니다.
+- **설정의 "저장된 키 삭제" 버튼** — 두 배포 모두에서 동작합니다.
+- `verify.js` 에 Node 배포 경로 점검 추가(런타임 구분, 화면 렌더, API 중계,
+  Apps Script 전용 기능 차단, 키 없을 때 처리).
+
+### 달라진 것
+
+- `api_bootstrap` 이 `runtime`('gas' / 'vercel')을 함께 돌려주고, 화면이 이 값으로
+  드라이브 저장 버튼 노출과 키 보관 방식을 정합니다.
+- 설정에서 키 칸을 비워 두고 저장하면 기존 키가 **유지**됩니다(이전에는 삭제되었습니다).
+  삭제는 전용 버튼으로 합니다.
+- `tools/dev-server.js` 가 Vercel과 같은 코드 경로를 쓰도록 단순해졌습니다.
+
 ## 2.1.0
 
 「2026 전북형 깊이 있는 수업·평가 · 백워드 설계」 연수 자료(1~4단계)를 반영해

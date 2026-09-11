@@ -1,0 +1,15 @@
+# clasp
+.clasp.json
+.clasprc.json
+
+# vercel
+.vercel
+
+# node
+node_modules/
+npm-debug.log*
+
+# 작업 중 생기는 파일
+*.hwpx
+!docs/samples/*.hwpx
+.DS_Store
