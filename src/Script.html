@@ -15,6 +15,21 @@
 
 var BOOT = null;
 var STORE_KEY = 'deepDesign.v3';
+var SETTINGS_KEY = 'deepDesign.settings';
+
+/* 서버에 키를 두지 않는 배포(Vercel 등)에서 쓰는 브라우저 쪽 설정 */
+var localSettings = { apiKey: '', model: '' };
+function isLocalKeyMode(){ return BOOT && BOOT.runtime && BOOT.runtime !== 'gas'; }
+function loadLocalSettings(){
+  try {
+    var raw = localStorage.getItem(SETTINGS_KEY);
+    if (raw) return JSON.parse(raw);
+  } catch(e){}
+  return { apiKey:'', model:'' };
+}
+function saveLocalSettings(){
+  try { localStorage.setItem(SETTINGS_KEY, JSON.stringify(localSettings)); } catch(e){}
+}
 
 var state = {
   mode: 'training',
@@ -69,6 +84,7 @@ window.addEventListener('DOMContentLoaded', function(){
   $('btnGuide').addEventListener('click', function(){ openMask('maskGuide'); });
   $('btnFramework').addEventListener('click', showFramework);
   $('btnSaveSettings').addEventListener('click', saveSettings);
+  $('btnClearKey').addEventListener('click', clearKey);
   $('btnPreview').addEventListener('click', showPreview);
   $('btnPrint').addEventListener('click', function(){ window.print(); });
   $('btnHwp').addEventListener('click', downloadHwpx);
@@ -102,10 +118,26 @@ window.addEventListener('DOMContentLoaded', function(){
 
 function onBoot(boot){
   BOOT = boot;
+  if (isLocalKeyMode()){
+    localSettings = loadLocalSettings();
+    BOOT.settings = { hasKey: !!localSettings.apiKey,
+                      model: localSettings.model || BOOT.settings.model };
+    var db = $('btnDrive'); if (db) db.style.display = 'none';   // 드라이브 저장은 Apps Script 전용
+  }
+  renderCredit();
   restore();
   fillSubjects();
   applyMetaToInputs();
   render();
+}
+
+/** 제작 표기 — 값은 Code.gs 의 APP_CREDIT 한 곳에서만 고친다. */
+function renderCredit(){
+  var c=BOOT.credit||{};
+  var html=esc(c.training||'')+'<br><b>'+esc(c.author||'')+'</b>';
+  ['creditBox','creditBox2'].forEach(function(id){
+    var el=$(id); if(el) el.innerHTML=html;
+  });
 }
 
 /* ---------------- 단원 선택 ---------------- */
@@ -200,6 +232,19 @@ function goStage(id){
   save();
 }
 
+/**
+ * AI 버튼은 저장된 키가 있을 때만 두 개로 나뉜다.
+ * 키가 없으면 [AI로 초안 만들기]도 결국 붙여넣기 창을 열기 때문에,
+ * 같은 일을 하는 버튼을 둘 보여 주지 않는다.
+ */
+function aiButtons(id){
+  if(BOOT.settings.hasKey){
+    return '<button class="btn pri" data-ai="1">AI로 초안 만들기</button>'+
+           '<button class="btn" data-paste="1">다른 AI로 하기</button>';
+  }
+  return '<button class="btn pri" data-paste="1">AI 프롬프트 만들기</button>';
+}
+
 function stageCard(id){
   var st=stageDef(id), u=currentUnit();
   var w=document.createElement('div');
@@ -240,15 +285,14 @@ function stageCard(id){
       '<h2>'+esc(st.name)+'</h2>'+
       '<div class="q">'+esc(st.question)+'</div>'+
       '<div class="intro">'+esc(st.intro)+'</div>'+
-      '<div class="ubd">'+esc(st.ubd)+'</div>'+
+      '<div class="ubd">'+esc(st.mapping)+'</div>'+
     '</div>'+
     '<div class="in">'+
       '<div class="prompts">'+chips+'</div>'+
       exHtml+
       fields+
       '<div class="rowbtns" style="margin-bottom:14px">'+
-        '<button class="btn pri" data-ai="1">AI로 초안 만들기</button>'+
-        '<button class="btn" data-paste="1">프롬프트 복사 / 붙여넣기</button>'+
+        aiButtons(id)+
         '<span class="hint" id="aiMsg'+id+'" style="color:#7c8899;font-size:12.5px"></span>'+
       '</div>'+
       (id===3 ? lessonSection(u) : '')+
@@ -273,8 +317,10 @@ function stageCard(id){
   });
   var fb=w.querySelector('[data-fill]'); if(fb) fb.addEventListener('click', function(){ fillExample(id,false); });
   var ab=w.querySelector('[data-append]'); if(ab) ab.addEventListener('click', function(){ fillExample(id,true); });
-  w.querySelector('[data-ai]').addEventListener('click', function(){ runAI(id); });
-  w.querySelector('[data-paste]').addEventListener('click', function(){ openPrompt(id); });
+  var aiBtn=w.querySelector('[data-ai]');
+  if(aiBtn) aiBtn.addEventListener('click', function(){ runAI(id); });
+  var pasteBtn=w.querySelector('[data-paste]');
+  if(pasteBtn) pasteBtn.addEventListener('click', function(){ openPrompt(id); });
 
   if(id===3){
     var mg=w.querySelector('#matHost');
@@ -309,7 +355,8 @@ function lessonSection(u){
   '<div id="lessonHost"></div>'+
   '<div class="rowbtns" style="margin-bottom:16px">'+
     '<button class="btn" id="btnLessonAdd">+ 차시 추가</button>'+
-    '<button class="btn pri" id="btnLessonAI">AI로 소재 제안받기</button>'+
+    '<button class="btn pri" id="btnLessonAI">'+
+      (BOOT.settings.hasKey ? 'AI로 소재 제안받기' : '소재 제안 프롬프트 만들기')+'</button>'+
     '<span class="hint" id="aiMsgL" style="color:#7c8899;font-size:12.5px"></span>'+
   '</div>';
 }
@@ -441,7 +488,7 @@ function fillExample(stageId, onlyEmpty){
 /* ---------------- AI ---------------- */
 function buildRequest(stageId, kind){
   var u=currentUnit();
-  return {
+  var req={
     stageId: stageId, kind: kind||'stage',
     meta: {
       subject: u?u.subject:'', area: u?u.area:'', unit: u?u.name:'',
@@ -451,6 +498,11 @@ function buildRequest(stageId, kind){
     stages: state.stages,
     lessons: state.lessons
   };
+  if (isLocalKeyMode()){                 // 서버에 키를 두지 않는 배포
+    req.apiKey = localSettings.apiKey || '';
+    req.model  = localSettings.model  || '';
+  }
+  return req;
 }
 function runAI(stageId){
   var u=currentUnit();
@@ -537,7 +589,12 @@ function applyPasted(){
   if(!text.trim()){ toast('붙여넣은 내용이 없습니다.'); return; }
   google.script.run
     .withSuccessHandler(function(res){
-      if(!res.ok){ toast('형식을 찾지 못했습니다. JSON 부분만 붙여 넣어 보세요.'); return; }
+      if(!res.ok){
+        toast(pasteKind==='lessons'
+          ? '형식을 찾지 못했습니다. [ 로 시작해 ] 로 끝나는 부분만 붙여 넣어 보세요.'
+          : '형식을 찾지 못했습니다. { 로 시작해 } 로 끝나는 부분만 붙여 넣어 보세요.');
+        return;
+      }
       if(pasteKind==='lessons') applyLessonRows(res.parsed);
       else applyParsed(pasteStageId,res.parsed);
       closeMask('maskPrompt');
@@ -551,13 +608,44 @@ function openSettings(){
   $('inKey').value='';
   $('inKey').placeholder=BOOT.settings.hasKey?'저장된 키 있음 (바꾸려면 새 키 입력)':'AIza…';
   $('inModel').value=BOOT.settings.model||'';
+  $('btnClearKey').style.display=BOOT.settings.hasKey?'inline-block':'none';
+  $('keyWhere').textContent=isLocalKeyMode()
+    ? '이 배포에서는 키가 서버에 저장되지 않고 이 브라우저에만 보관됩니다. 요청할 때마다 전달되어 Gemini로 중계됩니다.'
+    : '키는 사용자 본인 계정의 사용자 속성에 저장됩니다.';
   openMask('maskSettings');
 }
 function saveSettings(){
+  var key=$('inKey').value.trim(), model=$('inModel').value.trim();
+  if (isLocalKeyMode()){
+    if (key) localSettings.apiKey=key;
+    localSettings.model=model;
+    saveLocalSettings();
+    BOOT.settings={ hasKey:!!localSettings.apiKey, model:localSettings.model||BOOT.settings.model };
+    closeMask('maskSettings'); render(); toast('이 브라우저에 저장했습니다.');
+    return;
+  }
   google.script.run
-    .withSuccessHandler(function(s){ BOOT.settings=s; closeMask('maskSettings'); toast('저장했습니다.'); })
+    .withSuccessHandler(function(s){ BOOT.settings=s; closeMask('maskSettings'); render(); toast('저장했습니다.'); })
     .withFailureHandler(function(e){ toast('오류: '+e.message); })
-    .api_saveSettings({ apiKey:$('inKey').value, model:$('inModel').value });
+    .api_saveSettings({ apiKey:key?key:null, model:model });
+}
+function clearKey(){
+  if(!confirm('저장된 API 키를 지웁니다. 계속할까요?')) return;
+  if (isLocalKeyMode()){
+    localSettings.apiKey=''; saveLocalSettings();
+    BOOT.settings.hasKey=false;
+    $('btnClearKey').style.display='none';
+    $('inKey').placeholder='AIza…';
+    render(); toast('키를 지웠습니다.');
+    return;
+  }
+  google.script.run
+    .withSuccessHandler(function(s){
+      BOOT.settings=s; $('btnClearKey').style.display='none';
+      $('inKey').placeholder='AIza…'; render(); toast('키를 지웠습니다.');
+    })
+    .withFailureHandler(function(e){ toast('오류: '+e.message); })
+    .api_saveSettings({ apiKey:'' });
 }
 
 /* ---------------- 설계 점검 ---------------- */
@@ -680,7 +768,7 @@ function showPreview(){
   BOOT.stages.forEach(function(st){
     var d=state.stages[st.id]||{};
     h.push('<h2>'+esc(st.label)+'  '+esc(st.name)+'</h2>');
-    h.push('<p class="dq">생각해볼 질문 : '+esc(st.question)+'<br>'+esc(st.ubd)+'</p>');
+    h.push('<p class="dq">생각해볼 질문 : '+esc(st.question)+'<br>'+esc(st.mapping)+'</p>');
     h.push('<table>');
     st.fields.forEach(function(f){
       h.push('<tr><th>'+esc(f.label)+'</th><td>'+esc(d[f.key]||'')+'</td></tr>');

@@ -51,7 +51,7 @@ function buildDesignBlocks_(design) {
     var d = data[st.id] || {};
     b.push({ t: 'h1', text: st.label + '  ' + st.name });
     b.push({ t: 'hint', text: '생각해볼 질문 : ' + st.question });
-    b.push({ t: 'hint', text: st.ubd });
+    b.push({ t: 'hint', text: st.mapping });
     var rows = [];
     for (var f = 0; f < st.fields.length; f++) {
       var fld = st.fields[f];
@@ -125,6 +125,10 @@ function buildDesignBlocks_(design) {
     b.push({ t: 'h2', text: '메모' });
     b.push({ t: 'p', text: m.note });
   }
+
+  /* ---- 제작 표기 ---- */
+  b.push({ t: 'spacer' });
+  b.push({ t: 'hint', text: APP_CREDIT.doc });
   return b;
 }
 
