@@ -7,11 +7,21 @@
  **********************************************************************/
 
 var APP_TITLE   = '깊이 있는 수업·평가 설계 도우미';
-var APP_VERSION = '2.1.0';
+var APP_VERSION = '2.3.0';
 var DEFAULT_MODEL = 'gemini-2.5-flash';
 
 /** 한글 문서를 드라이브에 저장할 때 사용할 폴더 이름 */
 var DRIVE_FOLDER = '수업설계_한글문서';
+
+/**
+ * 제작 표기. 화면 왼쪽 아래, 사용 안내 창, 한글 문서 끝에 함께 쓰인다.
+ * 다른 학교·다른 분이 쓰실 때는 이 세 줄만 고치면 된다.
+ */
+var APP_CREDIT = {
+  training: '2026 전북형 깊이 있는 수업·평가 설계 연수',
+  author:   '연수 자료 한윤석(성당중학교),  설계 도구 제작  인월고등학교 유경현',
+  doc:      '2026 전북형 깊이 있는 수업·평가 설계 연수 · 설계 도구 제작 인월고등학교 유경현'
+};
 
 function doGet(e) {
   var t = HtmlService.createTemplateFromFile('Index');
@@ -49,4 +59,13 @@ function getUnitById_(id) {
 
 function todayStr_() {
   return Utilities.formatDate(new Date(), Session.getScriptTimeZone() || 'Asia/Seoul', 'yyyy. M. d.');
+}
+
+/**
+ * 실행 환경 이름. Apps Script 에서는 'gas',
+ * Node(Vercel·로컬 개발 서버)에서는 lib/gas-runtime.js 가 넣어 준 값이 쓰인다.
+ * 화면은 이 값으로 드라이브 저장·API 키 보관 방식을 구별한다.
+ */
+function runtimeName_() {
+  return (typeof GAS_RUNTIME_OVERRIDE !== 'undefined') ? GAS_RUNTIME_OVERRIDE : 'gas';
 }
