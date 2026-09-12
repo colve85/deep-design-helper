@@ -15,7 +15,7 @@ var UNITS_COMMON_MATH_2 = [
 
 {
   id: 'cm2-01',
-  subject: '공통수학2', area: '도형의 방정식', name: '좌표로 위치와 비율 설명하기', officialName: '평면좌표와 내분점',
+  subject: '공통수학2', area: '도형의 방정식', name: '학교 지도를 좌표로 바꾸어 위치와 비율 제안하기', officialName: '평면좌표와 내분점',
   standards: [
     {
       code: '10공수2-01-01',
@@ -138,7 +138,7 @@ var UNITS_COMMON_MATH_2 = [
 
 {
   id: 'cm2-02',
-  subject: '공통수학2', area: '도형의 방정식', name: '기울기로 두 점의 관계 모델링하기', officialName: '직선의 방정식',
+  subject: '공통수학2', area: '도형의 방정식', name: '경사로의 기울기로 두 지점의 관계 모델링하기', officialName: '직선의 방정식',
   standards: [
     {
       code: '10공수2-01-02',
@@ -265,7 +265,7 @@ var UNITS_COMMON_MATH_2 = [
 
 {
   id: 'cm2-03',
-  subject: '공통수학2', area: '도형의 방정식', name: '거리 조건으로 원의 경계 설계하기', officialName: '원의 방정식',
+  subject: '공통수학2', area: '도형의 방정식', name: '거리 조건으로 공원의 원형 경계 설계하기', officialName: '원의 방정식',
   standards: [
     {
       code: '10공수2-01-04',
@@ -391,7 +391,7 @@ var UNITS_COMMON_MATH_2 = [
 
 {
   id: 'cm2-04',
-  subject: '공통수학2', area: '도형의 방정식', name: '변환으로 도형의 불변량 찾기', officialName: '도형의 이동',
+  subject: '공통수학2', area: '도형의 방정식', name: '지도 변환으로 도형의 움직임과 불변량 찾기', officialName: '도형의 이동',
   standards: [
     {
       code: '10공수2-01-06',
@@ -517,7 +517,7 @@ var UNITS_COMMON_MATH_2 = [
 
 {
   id: 'cm2-05',
-  subject: '공통수학2', area: '집합과 명제', name: '조건을 집합으로 분류하고 비교하기', officialName: '집합',
+  subject: '공통수학2', area: '집합과 명제', name: '생활 조건을 집합으로 분류하고 비교하기', officialName: '집합',
   standards: [
     {
       code: '10공수2-02-01',
@@ -647,7 +647,7 @@ var UNITS_COMMON_MATH_2 = [
 
 {
   id: 'cm2-06',
-  subject: '공통수학2', area: '집합과 명제', name: '반례로 명제의 조건 검증하기', officialName: '명제',
+  subject: '공통수학2', area: '집합과 명제', name: '반례와 증명으로 주장의 조건 검증하기', officialName: '명제',
   standards: [
     {
       code: '10공수2-02-04',
@@ -782,7 +782,7 @@ var UNITS_COMMON_MATH_2 = [
 
 {
   id: 'cm2-07',
-  subject: '공통수학2', area: '함수와 그래프', name: '대응 규칙을 합성하고 역으로 해석하기', officialName: '함수·합성함수·역함수',
+  subject: '공통수학2', area: '함수와 그래프', name: '변환 과정을 합성하고 거꾸로 추적하기', officialName: '함수·합성함수·역함수',
   standards: [
     {
       code: '10공수2-03-01',
@@ -913,7 +913,7 @@ var UNITS_COMMON_MATH_2 = [
 
 {
   id: 'cm2-08',
-  subject: '공통수학2', area: '함수와 그래프', name: '정의역과 그래프의 제한 조건 읽기', officialName: '유리함수와 무리함수',
+  subject: '공통수학2', area: '함수와 그래프', name: '정의역과 그래프의 제한 조건을 읽고 설명하기', officialName: '유리함수와 무리함수',
   standards: [
     {
       code: '10공수2-03-04',

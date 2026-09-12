@@ -15,7 +15,7 @@ var UNITS_COMMON_MATH_1 = [
 
 {
   id: 'cm1-01',
-  subject: '공통수학1', area: '다항식', name: '분배법칙으로 식의 구조 설명하기', officialName: '다항식의 연산',
+  subject: '공통수학1', area: '다항식', name: '수 계산과 타일 넓이로 식의 구조 설명하기', officialName: '다항식의 연산',
   standards: [
     {
       code: '10공수1-01-01',
@@ -139,7 +139,7 @@ var UNITS_COMMON_MATH_1 = [
 
 {
   id: 'cm1-02',
-  subject: '공통수학1', area: '다항식', name: '나누지 않고 나머지 예측하기', officialName: '항등식과 나머지정리',
+  subject: '공통수학1', area: '다항식', name: '나누지 않고 나머지를 예측하고 검증하기', officialName: '항등식과 나머지정리',
   standards: [
     {
       code: '10공수1-01-02',
@@ -263,7 +263,7 @@ var UNITS_COMMON_MATH_1 = [
 
 {
   id: 'cm1-03',
-  subject: '공통수학1', area: '다항식', name: '곱의 구조로 식을 설계하기', officialName: '인수분해',
+  subject: '공통수학1', area: '다항식', name: '같은 넓이를 곱의 구조로 바꾸어 설명하기', officialName: '인수분해',
   standards: [
     {
       code: '10공수1-01-03',
@@ -386,7 +386,7 @@ var UNITS_COMMON_MATH_1 = [
 
 {
   id: 'cm1-04',
-  subject: '공통수학1', area: '방정식과 부등식', name: '실수 밖의 해로 방정식 확장하기', officialName: '복소수와 이차방정식',
+  subject: '공통수학1', area: '방정식과 부등식', name: '실수 밖의 해를 찾아 방정식의 세계 확장하기', officialName: '복소수와 이차방정식',
   standards: [
     {
       code: '10공수1-02-01',
@@ -517,7 +517,7 @@ var UNITS_COMMON_MATH_1 = [
 
 {
   id: 'cm1-05',
-  subject: '공통수학1', area: '방정식과 부등식', name: '그래프로 해와 조건을 함께 판단하기', officialName: '이차방정식과 이차함수',
+  subject: '공통수학1', area: '방정식과 부등식', name: '그래프로 교점과 해의 조건을 함께 판단하기', officialName: '이차방정식과 이차함수',
   standards: [
     {
       code: '10공수1-02-04',
@@ -648,7 +648,7 @@ var UNITS_COMMON_MATH_1 = [
 
 {
   id: 'cm1-06',
-  subject: '공통수학1', area: '방정식과 부등식', name: '조건을 식으로 세워 해 검증하기', officialName: '여러 가지 방정식',
+  subject: '공통수학1', area: '방정식과 부등식', name: '생활 조건을 식으로 세워 해를 검증하기', officialName: '여러 가지 방정식',
   standards: [
     {
       code: '10공수1-02-07',
@@ -775,7 +775,7 @@ var UNITS_COMMON_MATH_1 = [
 
 {
   id: 'cm1-07',
-  subject: '공통수학1', area: '방정식과 부등식', name: '가능한 범위를 부등식으로 결정하기', officialName: '여러 가지 부등식',
+  subject: '공통수학1', area: '방정식과 부등식', name: '안전·예산 조건의 가능한 범위 결정하기', officialName: '여러 가지 부등식',
   standards: [
     {
       code: '10공수1-02-09',
@@ -906,7 +906,7 @@ var UNITS_COMMON_MATH_1 = [
 
 {
   id: 'cm1-08',
-  subject: '공통수학1', area: '경우의 수', name: '빠짐없이 세어 순서를 설계하기', officialName: '경우의 수와 순열',
+  subject: '공통수학1', area: '경우의 수', name: '행사 좌석을 빠짐없이 세어 순서 설계하기', officialName: '경우의 수와 순열',
   standards: [
     {
       code: '10공수1-03-01',
@@ -1033,7 +1033,7 @@ var UNITS_COMMON_MATH_1 = [
 
 {
   id: 'cm1-09',
-  subject: '공통수학1', area: '경우의 수', name: '선택의 구조를 조합으로 설명하기', officialName: '조합',
+  subject: '공통수학1', area: '경우의 수', name: '팀 구성의 선택 구조를 조합으로 설명하기', officialName: '조합',
   standards: [
     {
       code: '10공수1-03-03',
@@ -1156,7 +1156,7 @@ var UNITS_COMMON_MATH_1 = [
 
 {
   id: 'cm1-10',
-  subject: '공통수학1', area: '행렬', name: '자료 표를 행렬로 바꾸어 결정하기', officialName: '행렬과 그 연산',
+  subject: '공통수학1', area: '행렬', name: '자료표를 행렬로 바꾸어 선택 결과 비교하기', officialName: '행렬과 그 연산',
   standards: [
     {
       code: '10공수1-04-01',
