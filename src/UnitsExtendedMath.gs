@@ -1,10 +1,10 @@
-/** 추가 과목 수업 설계 예시. 성취기준은 교사 재구성 초안임. */
+/** 추가 과목 수업 설계 예시. 워크북형 맥락·핵심 수행 제목을 사용한다. */
 var UNITS_EXTENDED_MATH = [
   {
     "id": "math22-01",
     "subject": "기본수학1",
     "area": "다항식",
-    "name": "타일로 이해하는 다항식",
+    "name": "타일과 넓이로 다항식의 구조 설명하고 새 조건에 전이하기",
     "standards": [
       {
         "code": "교사 재구성 목표 1",
@@ -91,13 +91,13 @@ var UNITS_EXTENDED_MATH = [
         "tool": "3수준 분석적 루브릭, 보고서 서식, 발표 자료"
       }
     ],
-    "officialName": "타일로 이해하는 다항식"
+    "officialName": "타일과 넓이로 다항식의 구조 설명하고 새 조건에 전이하기"
   },
   {
     "id": "math22-02",
     "subject": "기본수학1",
     "area": "방정식과 부등식",
-    "name": "판매 계획의 가능한 범위",
+    "name": "판매 조건을 방정식으로 세워 가능한 계획 검증하기",
     "standards": [
       {
         "code": "교사 재구성 목표 1",
@@ -184,13 +184,13 @@ var UNITS_EXTENDED_MATH = [
         "tool": "3수준 분석적 루브릭, 보고서 서식, 발표 자료"
       }
     ],
-    "officialName": "판매 계획의 가능한 범위"
+    "officialName": "판매 조건을 방정식으로 세워 가능한 계획 검증하기"
   },
   {
     "id": "math22-03",
     "subject": "기본수학1",
     "area": "경우의 수와 행렬",
-    "name": "행사 선택표와 수량표",
+    "name": "행사 자료표를 행렬로 바꾸어 선택 결과 비교하기",
     "standards": [
       {
         "code": "교사 재구성 목표 1",
@@ -277,13 +277,13 @@ var UNITS_EXTENDED_MATH = [
         "tool": "3수준 분석적 루브릭, 보고서 서식, 발표 자료"
       }
     ],
-    "officialName": "행사 선택표와 수량표"
+    "officialName": "행사 자료표를 행렬로 바꾸어 선택 결과 비교하기"
   },
   {
     "id": "math22-04",
     "subject": "기본수학2",
     "area": "도형의 방정식",
-    "name": "좌표로 정하는 만남 장소",
+    "name": "좌표로 만남 장소를 제안하고 거리 근거 설명하기",
     "standards": [
       {
         "code": "교사 재구성 목표 1",
@@ -370,13 +370,13 @@ var UNITS_EXTENDED_MATH = [
         "tool": "3수준 분석적 루브릭, 보고서 서식, 발표 자료"
       }
     ],
-    "officialName": "좌표로 정하는 만남 장소"
+    "officialName": "좌표로 만남 장소를 제안하고 거리 근거 설명하기"
   },
   {
     "id": "math22-05",
     "subject": "기본수학2",
     "area": "집합과 명제",
-    "name": "동아리 안내 조건 읽기",
+    "name": "안내문 속 집합과 명제의 조건을 읽고 반례 찾기",
     "standards": [
       {
         "code": "교사 재구성 목표 1",
@@ -463,13 +463,13 @@ var UNITS_EXTENDED_MATH = [
         "tool": "3수준 분석적 루브릭, 보고서 서식, 발표 자료"
       }
     ],
-    "officialName": "동아리 안내 조건 읽기"
+    "officialName": "안내문 속 집합과 명제의 조건을 읽고 반례 찾기"
   },
   {
     "id": "math22-06",
     "subject": "기본수학2",
     "area": "함수와 그래프",
-    "name": "요금 규칙과 역으로 찾기",
+    "name": "요금 규칙을 함수로 읽고 역으로 이용량 추적하기",
     "standards": [
       {
         "code": "교사 재구성 목표 1",
@@ -556,13 +556,13 @@ var UNITS_EXTENDED_MATH = [
         "tool": "3수준 분석적 루브릭, 보고서 서식, 발표 자료"
       }
     ],
-    "officialName": "요금 규칙과 역으로 찾기"
+    "officialName": "요금 규칙을 함수로 읽고 역으로 이용량 추적하기"
   },
   {
     "id": "math22-07",
     "subject": "대수",
     "area": "지수함수와 로그함수",
-    "name": "성장률과 목표 도달 시간",
+    "name": "성장률 자료를 지수·로그 함수로 모델링해 목표 시간 예측하기",
     "standards": [
       {
         "code": "교사 재구성 목표 1",
@@ -649,13 +649,13 @@ var UNITS_EXTENDED_MATH = [
         "tool": "3수준 분석적 루브릭, 보고서 서식, 발표 자료"
       }
     ],
-    "officialName": "성장률과 목표 도달 시간"
+    "officialName": "성장률 자료를 지수·로그 함수로 모델링해 목표 시간 예측하기"
   },
   {
     "id": "math22-08",
     "subject": "대수",
     "area": "삼각함수",
-    "name": "회전 놀이기구의 높이",
+    "name": "회전 놀이기구의 높이를 삼각함수로 모델링하고 안전 판단하기",
     "standards": [
       {
         "code": "교사 재구성 목표 1",
@@ -742,13 +742,13 @@ var UNITS_EXTENDED_MATH = [
         "tool": "3수준 분석적 루브릭, 보고서 서식, 발표 자료"
       }
     ],
-    "officialName": "회전 놀이기구의 높이"
+    "officialName": "회전 놀이기구의 높이를 삼각함수로 모델링하고 안전 판단하기"
   },
   {
     "id": "math22-09",
     "subject": "대수",
     "area": "수열",
-    "name": "규칙으로 세우는 누적 계획",
+    "name": "반복 규칙을 수열로 일반화해 누적 계획 예측하기",
     "standards": [
       {
         "code": "교사 재구성 목표 1",
@@ -835,13 +835,13 @@ var UNITS_EXTENDED_MATH = [
         "tool": "3수준 분석적 루브릭, 보고서 서식, 발표 자료"
       }
     ],
-    "officialName": "규칙으로 세우는 누적 계획"
+    "officialName": "반복 규칙을 수열로 일반화해 누적 계획 예측하기"
   },
   {
     "id": "math22-10",
     "subject": "미적분Ⅰ",
     "area": "함수의 극한과 연속",
-    "name": "연결되는 요금 그래프",
+    "name": "구간별 요금 변화를 함수 그래프로 연결해 선택 근거 설명하기",
     "standards": [
       {
         "code": "교사 재구성 목표 1",
@@ -928,13 +928,13 @@ var UNITS_EXTENDED_MATH = [
         "tool": "3수준 분석적 루브릭, 보고서 서식, 발표 자료"
       }
     ],
-    "officialName": "연결되는 요금 그래프"
+    "officialName": "구간별 요금 변화를 함수 그래프로 연결해 선택 근거 설명하기"
   },
   {
     "id": "math22-11",
     "subject": "미적분Ⅰ",
     "area": "미분",
-    "name": "상자 설계의 최댓값",
+    "name": "상자 부피의 변화를 미분해 최댓값 설계하기",
     "standards": [
       {
         "code": "교사 재구성 목표 1",
@@ -1021,13 +1021,13 @@ var UNITS_EXTENDED_MATH = [
         "tool": "3수준 분석적 루브릭, 보고서 서식, 발표 자료"
       }
     ],
-    "officialName": "상자 설계의 최댓값"
+    "officialName": "상자 부피의 변화를 미분해 최댓값 설계하기"
   },
   {
     "id": "math22-12",
     "subject": "미적분Ⅰ",
     "area": "적분",
-    "name": "이동 기록의 두 가지 합",
+    "name": "이동 기록을 미분과 적분으로 연결해 거리 검증하기",
     "standards": [
       {
         "code": "교사 재구성 목표 1",
@@ -1114,13 +1114,13 @@ var UNITS_EXTENDED_MATH = [
         "tool": "3수준 분석적 루브릭, 보고서 서식, 발표 자료"
       }
     ],
-    "officialName": "이동 기록의 두 가지 합"
+    "officialName": "이동 기록을 미분과 적분으로 연결해 거리 검증하기"
   },
   {
     "id": "math22-13",
     "subject": "확률과 통계",
     "area": "경우의 수",
-    "name": "순서와 중복을 구분하는 행사 코드",
+    "name": "행사 코드를 경우의 수로 빠짐없이 세어 설계하기",
     "standards": [
       {
         "code": "교사 재구성 목표 1",
@@ -1207,13 +1207,13 @@ var UNITS_EXTENDED_MATH = [
         "tool": "3수준 분석적 루브릭, 보고서 서식, 발표 자료"
       }
     ],
-    "officialName": "순서와 중복을 구분하는 행사 코드"
+    "officialName": "행사 코드를 경우의 수로 빠짐없이 세어 설계하기"
   },
   {
     "id": "math22-14",
     "subject": "확률과 통계",
     "area": "확률",
-    "name": "검사 결과를 읽는 조건",
+    "name": "검사 결과를 조건부확률로 읽고 판단 근거 제시하기",
     "standards": [
       {
         "code": "교사 재구성 목표 1",
@@ -1300,13 +1300,13 @@ var UNITS_EXTENDED_MATH = [
         "tool": "3수준 분석적 루브릭, 보고서 서식, 발표 자료"
       }
     ],
-    "officialName": "검사 결과를 읽는 조건"
+    "officialName": "검사 결과를 조건부확률로 읽고 판단 근거 제시하기"
   },
   {
     "id": "math22-15",
     "subject": "확률과 통계",
     "area": "통계",
-    "name": "설문 결과의 불확실성",
+    "name": "설문 결과의 불확실성을 통계적으로 추정하고 설명하기",
     "standards": [
       {
         "code": "교사 재구성 목표 1",
@@ -1393,13 +1393,13 @@ var UNITS_EXTENDED_MATH = [
         "tool": "3수준 분석적 루브릭, 보고서 서식, 발표 자료"
       }
     ],
-    "officialName": "설문 결과의 불확실성"
+    "officialName": "설문 결과의 불확실성을 통계적으로 추정하고 설명하기"
   },
   {
     "id": "math22-16",
     "subject": "미적분Ⅱ",
     "area": "수열의 극한",
-    "name": "끝없이 더하는 유한한 길이",
+    "name": "무한히 더하는 길이의 수렴과 근사 오차 설명하기",
     "standards": [
       {
         "code": "교사 재구성 목표 1",
@@ -1486,13 +1486,13 @@ var UNITS_EXTENDED_MATH = [
         "tool": "3수준 분석적 루브릭, 보고서 서식, 발표 자료"
       }
     ],
-    "officialName": "끝없이 더하는 유한한 길이"
+    "officialName": "무한히 더하는 길이의 수렴과 근사 오차 설명하기"
   },
   {
     "id": "math22-17",
     "subject": "미적분Ⅱ",
     "area": "미분법",
-    "name": "냉각 모형의 순간 변화",
+    "name": "냉각 자료의 순간 변화율을 미분방정식으로 모델링하기",
     "standards": [
       {
         "code": "교사 재구성 목표 1",
@@ -1579,13 +1579,13 @@ var UNITS_EXTENDED_MATH = [
         "tool": "3수준 분석적 루브릭, 보고서 서식, 발표 자료"
       }
     ],
-    "officialName": "냉각 모형의 순간 변화"
+    "officialName": "냉각 자료의 순간 변화율을 미분방정식으로 모델링하기"
   },
   {
     "id": "math22-18",
     "subject": "미적분Ⅱ",
     "area": "적분법",
-    "name": "곡선 아래 누적량 구하기",
+    "name": "곡선 아래 누적량을 적분해 실제 양으로 해석하기",
     "standards": [
       {
         "code": "교사 재구성 목표 1",
@@ -1672,13 +1672,13 @@ var UNITS_EXTENDED_MATH = [
         "tool": "3수준 분석적 루브릭, 보고서 서식, 발표 자료"
       }
     ],
-    "officialName": "곡선 아래 누적량 구하기"
+    "officialName": "곡선 아래 누적량을 적분해 실제 양으로 해석하기"
   },
   {
     "id": "math22-19",
     "subject": "기하",
     "area": "이차곡선",
-    "name": "빛을 모으는 단면 설계",
+    "name": "빛을 모으는 단면을 이차곡선으로 설계하고 검증하기",
     "standards": [
       {
         "code": "교사 재구성 목표 1",
@@ -1765,13 +1765,13 @@ var UNITS_EXTENDED_MATH = [
         "tool": "3수준 분석적 루브릭, 보고서 서식, 발표 자료"
       }
     ],
-    "officialName": "빛을 모으는 단면 설계"
+    "officialName": "빛을 모으는 단면을 이차곡선으로 설계하고 검증하기"
   },
   {
     "id": "math22-20",
     "subject": "기하",
     "area": "평면벡터",
-    "name": "바람 속 이동 경로",
+    "name": "바람 속 이동 경로를 벡터로 표현해 방향과 거리 판단하기",
     "standards": [
       {
         "code": "교사 재구성 목표 1",
@@ -1858,13 +1858,13 @@ var UNITS_EXTENDED_MATH = [
         "tool": "3수준 분석적 루브릭, 보고서 서식, 발표 자료"
       }
     ],
-    "officialName": "바람 속 이동 경로"
+    "officialName": "바람 속 이동 경로를 벡터로 표현해 방향과 거리 판단하기"
   },
   {
     "id": "math22-21",
     "subject": "기하",
     "area": "공간도형과 공간좌표",
-    "name": "입체 공간의 안전 거리",
+    "name": "입체 공간의 안전 거리를 공간좌표로 계산하고 제안하기",
     "standards": [
       {
         "code": "교사 재구성 목표 1",
@@ -1951,13 +1951,13 @@ var UNITS_EXTENDED_MATH = [
         "tool": "3수준 분석적 루브릭, 보고서 서식, 발표 자료"
       }
     ],
-    "officialName": "입체 공간의 안전 거리"
+    "officialName": "입체 공간의 안전 거리를 공간좌표로 계산하고 제안하기"
   },
   {
     "id": "math22-22",
     "subject": "경제 수학",
     "area": "수와 경제",
-    "name": "비율 변화와 지수 읽기",
+    "name": "비율 변화 자료를 지수함수로 읽고 증가를 예측하기",
     "standards": [
       {
         "code": "교사 재구성 목표 1",
@@ -2044,13 +2044,13 @@ var UNITS_EXTENDED_MATH = [
         "tool": "3수준 분석적 루브릭, 보고서 서식, 발표 자료"
       }
     ],
-    "officialName": "비율 변화와 지수 읽기"
+    "officialName": "비율 변화 자료를 지수함수로 읽고 증가를 예측하기"
   },
   {
     "id": "math22-23",
     "subject": "경제 수학",
     "area": "금융",
-    "name": "단리와 복리 비교",
+    "name": "단리와 복리 자료를 비교해 금융 선택의 근거 만들기",
     "standards": [
       {
         "code": "교사 재구성 목표 1",
@@ -2137,13 +2137,13 @@ var UNITS_EXTENDED_MATH = [
         "tool": "3수준 분석적 루브릭, 보고서 서식, 발표 자료"
       }
     ],
-    "officialName": "단리와 복리 비교"
+    "officialName": "단리와 복리 자료를 비교해 금융 선택의 근거 만들기"
   },
   {
     "id": "math22-24",
     "subject": "경제 수학",
     "area": "함수와 미분",
-    "name": "가격과 수요로 보는 이익",
+    "name": "가격과 수요 함수로 이익의 최적 지점 찾기",
     "standards": [
       {
         "code": "교사 재구성 목표 1",
@@ -2230,13 +2230,13 @@ var UNITS_EXTENDED_MATH = [
         "tool": "3수준 분석적 루브릭, 보고서 서식, 발표 자료"
       }
     ],
-    "officialName": "가격과 수요로 보는 이익"
+    "officialName": "가격과 수요 함수로 이익의 최적 지점 찾기"
   },
   {
     "id": "math22-25",
     "subject": "인공지능 수학",
     "area": "자료의 표현",
-    "name": "이미지를 수로 표현하기",
+    "name": "이미지를 수로 표현해 픽셀 패턴과 유사도 비교하기",
     "standards": [
       {
         "code": "교사 재구성 목표 1",
@@ -2323,13 +2323,13 @@ var UNITS_EXTENDED_MATH = [
         "tool": "3수준 분석적 루브릭, 보고서 서식, 발표 자료"
       }
     ],
-    "officialName": "이미지를 수로 표현하기"
+    "officialName": "이미지를 수로 표현해 픽셀 패턴과 유사도 비교하기"
   },
   {
     "id": "math22-26",
     "subject": "인공지능 수학",
     "area": "예측과 최적화",
-    "name": "예측 오차를 줄이는 직선",
+    "name": "예측 오차를 줄이는 직선을 만들고 모델의 한계 설명하기",
     "standards": [
       {
         "code": "교사 재구성 목표 1",
@@ -2416,13 +2416,13 @@ var UNITS_EXTENDED_MATH = [
         "tool": "3수준 분석적 루브릭, 보고서 서식, 발표 자료"
       }
     ],
-    "officialName": "예측 오차를 줄이는 직선"
+    "officialName": "예측 오차를 줄이는 직선을 만들고 모델의 한계 설명하기"
   },
   {
     "id": "math22-27",
     "subject": "직무 수학",
     "area": "수와 연산",
-    "name": "자재 발주와 손실률",
+    "name": "자재 발주 자료로 비율과 함수의 손실을 계산하기",
     "standards": [
       {
         "code": "교사 재구성 목표 1",
@@ -2509,13 +2509,13 @@ var UNITS_EXTENDED_MATH = [
         "tool": "3수준 분석적 루브릭, 보고서 서식, 발표 자료"
       }
     ],
-    "officialName": "자재 발주와 손실률"
+    "officialName": "자재 발주 자료로 비율과 함수의 손실을 계산하기"
   },
   {
     "id": "math22-28",
     "subject": "직무 수학",
     "area": "도형과 측정",
-    "name": "도면과 실제 크기",
+    "name": "도면과 실제 크기의 비례를 사용해 공간 설계하기",
     "standards": [
       {
         "code": "교사 재구성 목표 1",
@@ -2602,13 +2602,13 @@ var UNITS_EXTENDED_MATH = [
         "tool": "3수준 분석적 루브릭, 보고서 서식, 발표 자료"
       }
     ],
-    "officialName": "도면과 실제 크기"
+    "officialName": "도면과 실제 크기의 비례를 사용해 공간 설계하기"
   },
   {
     "id": "math22-29",
     "subject": "직무 수학",
     "area": "자료와 가능성",
-    "name": "작업 품질 자료 비교",
+    "name": "작업 품질 자료를 통계적으로 비교해 개선안 제안하기",
     "standards": [
       {
         "code": "교사 재구성 목표 1",
@@ -2695,13 +2695,13 @@ var UNITS_EXTENDED_MATH = [
         "tool": "3수준 분석적 루브릭, 보고서 서식, 발표 자료"
       }
     ],
-    "officialName": "작업 품질 자료 비교"
+    "officialName": "작업 품질 자료를 통계적으로 비교해 개선안 제안하기"
   },
   {
     "id": "math22-30",
     "subject": "수학과 문화",
     "area": "수학과 예술",
-    "name": "문양의 대칭과 반복",
+    "name": "문양의 대칭과 반복을 찾아 수학적 창작으로 표현하기",
     "standards": [
       {
         "code": "교사 재구성 목표 1",
@@ -2788,13 +2788,13 @@ var UNITS_EXTENDED_MATH = [
         "tool": "3수준 분석적 루브릭, 보고서 서식, 발표 자료"
       }
     ],
-    "officialName": "문양의 대칭과 반복"
+    "officialName": "문양의 대칭과 반복을 찾아 수학적 창작으로 표현하기"
   },
   {
     "id": "math22-31",
     "subject": "수학과 문화",
     "area": "수학과 생활",
-    "name": "음계 속 비율",
+    "name": "음계 속 비율을 분석해 소리의 수학적 구조 설명하기",
     "standards": [
       {
         "code": "교사 재구성 목표 1",
@@ -2881,13 +2881,13 @@ var UNITS_EXTENDED_MATH = [
         "tool": "3수준 분석적 루브릭, 보고서 서식, 발표 자료"
       }
     ],
-    "officialName": "음계 속 비율"
+    "officialName": "음계 속 비율을 분석해 소리의 수학적 구조 설명하기"
   },
   {
     "id": "math22-32",
     "subject": "실용 통계",
     "area": "통계적 탐구",
-    "name": "학교 설문 제대로 설계하기",
+    "name": "학교 설문을 통계 문제로 바꾸고 표본 설계하기",
     "standards": [
       {
         "code": "교사 재구성 목표 1",
@@ -2974,13 +2974,13 @@ var UNITS_EXTENDED_MATH = [
         "tool": "3수준 분석적 루브릭, 보고서 서식, 발표 자료"
       }
     ],
-    "officialName": "학교 설문 제대로 설계하기"
+    "officialName": "학교 설문을 통계 문제로 바꾸고 표본 설계하기"
   },
   {
     "id": "math22-33",
     "subject": "실용 통계",
     "area": "자료 분석",
-    "name": "평균 뒤의 분포 읽기",
+    "name": "평균 뒤의 분포를 비교해 자료의 특징 설명하기",
     "standards": [
       {
         "code": "교사 재구성 목표 1",
@@ -3067,13 +3067,13 @@ var UNITS_EXTENDED_MATH = [
         "tool": "3수준 분석적 루브릭, 보고서 서식, 발표 자료"
       }
     ],
-    "officialName": "평균 뒤의 분포 읽기"
+    "officialName": "평균 뒤의 분포를 비교해 자료의 특징 설명하기"
   },
   {
     "id": "math22-34",
     "subject": "수학과제 탐구",
     "area": "탐구 설계",
-    "name": "급식 대기 문제 수학화하기",
+    "name": "급식 대기 문제를 수학화해 개선 모형 제안하기",
     "standards": [
       {
         "code": "교사 재구성 목표 1",
@@ -3160,13 +3160,13 @@ var UNITS_EXTENDED_MATH = [
         "tool": "3수준 분석적 루브릭, 보고서 서식, 발표 자료"
       }
     ],
-    "officialName": "급식 대기 문제 수학화하기"
+    "officialName": "급식 대기 문제를 수학화해 개선 모형 제안하기"
   },
   {
     "id": "math22-35",
     "subject": "수학과제 탐구",
     "area": "탐구 수행과 공유",
-    "name": "모형 검증과 탐구 보고서",
+    "name": "수학 모형을 검증하고 탐구 결과와 한계 발표하기",
     "standards": [
       {
         "code": "교사 재구성 목표 1",
@@ -3253,6 +3253,6 @@ var UNITS_EXTENDED_MATH = [
         "tool": "3수준 분석적 루브릭, 보고서 서식, 발표 자료"
       }
     ],
-    "officialName": "모형 검증과 탐구 보고서"
+    "officialName": "수학 모형을 검증하고 탐구 결과와 한계 발표하기"
   }
 ];
