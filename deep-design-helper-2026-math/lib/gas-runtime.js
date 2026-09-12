@@ -67,7 +67,7 @@ const Utilities = {
 };
 
 /** 파일 로드 순서 — 전역 선언만 있으므로 순서에 민감하지 않다. */
-const GAS_FILES = ['Code.gs', 'Stages.gs', 'UnitsCommonMath1.gs', 'UnitsCommonMath2.gs', 'UnitsExtendedMath.gs', 'UnitsOfficialMath.gs',
+const GAS_FILES = ['Code.gs', 'Stages.gs', 'UnitsCommonMath1.gs', 'UnitsCommonMath2.gs', 'UnitsExtendedMath.gs',
                    'HwpxTemplate.gs', 'Hwpx.gs', 'DocBuilder.gs', 'Api.gs'];
 
 /**

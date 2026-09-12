@@ -63,7 +63,7 @@ Vercel 배포와 같은 코드 경로를 쓰므로, 여기서 정상이면 Verce
 
    | 저장소 파일 | 편집기에서 만들 때 |
    |---|---|
-   | `Code.gs`, `Stages.gs`, `UnitsCommonMath1.gs`, `UnitsCommonMath2.gs`, `UnitsExtendedMath.gs`, `UnitsOfficialMath.gs`, `Api.gs`, `DocBuilder.gs`, `Hwpx.gs`, `HwpxTemplate.gs` | **＋ → 스크립트**, 이름에서 `.gs`는 자동으로 붙습니다 |
+   | `Code.gs`, `Stages.gs`, `UnitsCommonMath1.gs`, `UnitsCommonMath2.gs`, `UnitsExtendedMath.gs`, `Api.gs`, `DocBuilder.gs`, `Hwpx.gs`, `HwpxTemplate.gs` | **＋ → 스크립트**, 이름에서 `.gs`는 자동으로 붙습니다 |
    | `Index.html`, `Style.html`, `Script.html` | **＋ → HTML**, 이름은 확장자 없이 `Index`, `Style`, `Script` |
 
    처음 만들어져 있는 `Code.gs`는 내용을 지우고 이 저장소의 `Code.gs` 내용을 넣으면 됩니다.
